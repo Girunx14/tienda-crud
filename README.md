@@ -248,37 +248,6 @@ Este proyecto sigue la convención [Conventional Commits](https://www.convention
 | `style:`    | Cambios de estilo/formato |
 
 ---
-### Ejemplos usados en este proyecto
-
-```css
-
-chore: initial Laravel 10 project setup
-
-chore: configure database connection for tienda MySQL database
-
-feat: add migrations for cliente and producto tables
-
-feat: add Eloquent models for Cliente and Producto
-
-feat: add Form Request validations for Cliente and Producto
-
-feat: add resource controllers for Cliente and Producto
-
-feat: register resource routes for clientes and productos
-
-feat: add base Blade layout with Bootstrap 5 and navbar
-
-feat: add Blade views for Cliente CRUD (index, create, edit, show)
-
-feat: add Blade views for Producto CRUD (index, create, edit, show)
-
-feat: add dashboard, Spanish pagination and i18n validation messages
-
-docs: add project README
-
-```
-
----
 ##  Autor
 Desarrollado como proyecto de aprendizaje de Laravel 10.
 
