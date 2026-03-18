@@ -157,37 +157,21 @@ Visita `http://127.0.0.1:8000` en tu navegador.
 ```css
 
 tienda-crud/
-
 ├── app/
-
 │   ├── Http/
-
 │   │   ├── Controllers/
-
 │   │   │   ├── ClienteController.php       # CRUD Resource de clientes
-
 │   │   │   └── ProductoController.php      # CRUD Resource de productos
-
 │   │   └── Requests/
-
 │   │       ├── StoreClienteRequest.php     # Validación al crear cliente
-
 │   │       ├── UpdateClienteRequest.php    # Validación al editar cliente
-
 │   │       ├── StoreProductoRequest.php    # Validación al crear producto
-
 │   │       └── UpdateProductoRequest.php   # Validación al editar producto
-
 │   ├── Models/
-
 │   │   ├── Cliente.php                     # Modelo Eloquent de cliente
-
 │   │   └── Producto.php                    # Modelo Eloquent de producto
-
 │   └── Providers/
-
 │       └── AppServiceProvider.php          # Configuración de paginación Bootstrap
-
 ├── database/
 │   └── migrations/
 │       ├── xxxx_create_cliente_table.php   # Migración tabla cliente
