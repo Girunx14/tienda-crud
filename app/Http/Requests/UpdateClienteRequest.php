@@ -1,5 +1,4 @@
 <?php
-// app/Http/Requests/UpdateClienteRequest.php
 
 namespace App\Http\Requests;
 
@@ -12,18 +11,12 @@ class UpdateClienteRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Reglas de validación para ACTUALIZAR un cliente.
-     * El RFC sigue siendo único EXCEPTO para el registro actual
-     * (ignore evita que falle al compararse consigo mismo).
-     */
     public function rules(): array
     {
         return [
             'nombre'           => ['required', 'string', 'max:255'],
             'apellido_paterno' => ['required', 'string', 'max:255'],
             'apellido_materno' => ['required', 'string', 'max:255'],
-            // ignore:{id} = ignora el registro actual al validar unicidad
             'rfc'              => [
                 'required',
                 'string',

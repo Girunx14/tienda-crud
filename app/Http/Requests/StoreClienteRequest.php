@@ -1,5 +1,4 @@
 <?php
-// app/Http/Requests/StoreClienteRequest.php
 
 namespace App\Http\Requests;
 
@@ -7,18 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreClienteRequest extends FormRequest
 {
-    /**
-     * Cualquier usuario autenticado puede hacer esta petición.
-     * Retornamos true porque aún no tenemos sistema de autenticación.
-     */
+
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Reglas de validación para CREAR un cliente.
-     */
+
     public function rules(): array
     {
         return [
@@ -30,9 +24,7 @@ class StoreClienteRequest extends FormRequest
         ];
     }
 
-    /**
-     * Mensajes de error personalizados en español.
-     */
+
     public function messages(): array
     {
         return [

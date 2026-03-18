@@ -1,5 +1,4 @@
 <?php
-// database/migrations/xxxx_create_cliente_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,13 +16,13 @@ return new class extends Migration
             $table->string('nombre');                  // nombre VARCHAR
             $table->string('apellido_paterno');        // apellido_paterno VARCHAR
             $table->string('apellido_materno');        // apellido_materno VARCHAR
-            $table->string('rfc')->unique();           // rfc VARCHAR, único
+            $table->string('rfc')->unique();           // rfc VARCHAR, unico
             $table->timestamps();                      // created_at y updated_at
         });
     }
 
     /**
-     * Revierte la migración (elimina la tabla).
+     * Revierte la migracion (elimina la tabla).
      */
     public function down(): void
     {

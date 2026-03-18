@@ -1,6 +1,4 @@
 <?php
-// app/Http/Requests/UpdateProductoRequest.php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -12,9 +10,6 @@ class UpdateProductoRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Reglas de validación para ACTUALIZAR un producto.
-     */
     public function rules(): array
     {
         return [

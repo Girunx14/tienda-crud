@@ -10,16 +10,8 @@ class Producto extends Model
 {
     use HasFactory;
 
-    /**
-     * Nombre de la tabla en la base de datos.
-     * Lo definimos explícitamente porque Laravel asumiría "productos" (plural)
-     * pero nuestra tabla se llama "producto" (singular).
-     */
     protected $table = 'producto';
 
-    /**
-     * Campos que se pueden asignar masivamente.
-     */
     protected $fillable = [
         'nombre',
         'cantidad',
@@ -27,10 +19,6 @@ class Producto extends Model
         'categoria',
     ];
 
-    /**
-     * Conversión automática de tipos.
-     * Esto hace que "precio" siempre sea tratado como decimal en PHP.
-     */
     protected $casts = [
         'precio' => 'decimal:2',
     ];

@@ -1,5 +1,4 @@
 <?php
-// database/migrations/xxxx_create_producto_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,7 +22,7 @@ return new class extends Migration
     }
 
     /**
-     * Revierte la migración (elimina la tabla).
+     * Revierte la migracion (elimina la tabla).
      */
     public function down(): void
     {

@@ -1,5 +1,4 @@
 <?php
-// app/Http/Requests/StoreProductoRequest.php
 
 namespace App\Http\Requests;
 
@@ -12,9 +11,7 @@ class StoreProductoRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Reglas de validación para CREAR un producto.
-     */
+
     public function rules(): array
     {
         return [
