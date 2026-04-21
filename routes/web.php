@@ -8,11 +8,17 @@ use App\Models\Cliente;
 use App\Models\Producto;
 
 Route::get('/', function () {
-    $totalClientes  = Cliente::count();
-    $totalProductos = Producto::count();
-
-    return view('welcome', compact('totalClientes', 'totalProductos'));
+    if (Auth::check()) {
+        $totalClientes  = \App\Models\Cliente::count();
+        $totalProductos = \App\Models\Producto::count();
+        return view('welcome', compact('totalClientes', 'totalProductos'));
+    }
+    return redirect()->route('login');
 });
 
-Route::resource('clientes', ClienteController::class);
-Route::resource('productos', ProductoController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('clientes', ClienteController::class);
+    Route::resource('productos', ProductoController::class);
+});
+
+Auth::routes();
