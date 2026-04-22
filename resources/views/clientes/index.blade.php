@@ -1,91 +1,82 @@
 {{-- resources/views/clientes/index.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Clientes')
+@section('title', 'Directorio de Clientes')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="bi bi-people"></i> Clientes</h2>
-    <a href="{{ route('clientes.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle"></i> Nuevo Cliente
-    </a>
+<div class="row align-items-center mb-4">
+    <div class="col-md-6">
+        <h2 class="fw-bold mb-0">Base de Clientes</h2>
+        <p class="text-muted small">Gestión centralizada de perfiles y facturación.</p>
+    </div>
+    <div class="col-md-6 text-md-end">
+        <a href="{{ route('clientes.create') }}" class="btn btn-premium d-inline-flex align-items-center">
+            <i class="bi bi-person-plus-fill me-2 fs-5"></i> Nuevo Registro
+        </a>
+    </div>
 </div>
 
-{{-- Tabla de clientes --}}
-@if($clientes->isEmpty())
-    <div class="alert alert-info">
-        <i class="bi bi-info-circle"></i> No hay clientes registrados aún.
-        <a href="{{ route('clientes.create') }}">¡Registra el primero!</a>
-    </div>
-@else
-    <div class="table-responsive">
-        <table class="table table-striped table-hover shadow-sm">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>RFC</th>
-                    <th class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($clientes as $cliente)
-                <tr>
-                    <td>{{ $cliente->id }}</td>
-                    <td>{{ $cliente->nombre }}</td>
-                    <td>{{ $cliente->apellido_paterno }}</td>
-                    <td>{{ $cliente->apellido_materno }}</td>
-                    <td><span class="badge bg-secondary">{{ $cliente->rfc }}</span></td>
-                    <td class="text-center">
-                        {{-- Ver --}}
-                        <a href="{{ route('clientes.show', $cliente) }}"
-                           class="btn btn-sm btn-info btn-action" title="Ver">
-                            <i class="bi bi-eye"></i>
-                        </a>
+<div class="glass-card border-0 p-4 mb-5">
+    @if($clientes->isEmpty())
+        <div class="text-center py-5">
+            <i class="bi bi-people display-1 text-muted opacity-25"></i>
+            <h5 class="text-muted mt-3">No hay clientes registrados</h5>
+            <a href="{{ route('clientes.create') }}" class="btn btn-link">Crear el primer registro</a>
+        </div>
+    @else
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>RFC / Identificación</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($clientes as $cliente)
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-md bg-soft-primary text-primary rounded-3 d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; background: rgba(99, 102, 241, 0.1);">
+                                    <i class="bi bi-person-fill fs-4"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">{{ $cliente->nombre }}</h6>
+                                    <span class="text-muted small">{{ $cliente->apellido_paterno }} {{ $cliente->apellido_materno }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-semibold" style="letter-spacing: 0.5px;">
+                                {{ $cliente->rfc }}
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="{{ route('clientes.show', $cliente) }}" class="btn btn-light btn-sm rounded-3 border" title="Ver Perfil">
+                                    <i class="bi bi-person-vcard text-primary"></i>
+                                </a>
+                                <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-light btn-sm rounded-3 border" title="Editar">
+                                    <i class="bi bi-pencil-square text-warning"></i>
+                                </a>
+                                <form action="{{ route('clientes.destroy', $cliente) }}" method="POST" onsubmit="return confirm('¿Eliminar registro de cliente?')">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-light btn-sm rounded-3 border" title="Eliminar">
+                                        <i class="bi bi-trash text-danger"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-                        {{-- Editar --}}
-                        <a href="{{ route('clientes.edit', $cliente) }}"
-                           class="btn btn-sm btn-warning btn-action" title="Editar">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-
-                        {{-- Eliminar --}}
-                        <form action="{{ route('clientes.destroy', $cliente) }}"
-                              method="POST" class="d-inline"
-                              onsubmit="return confirmarEliminar(event)">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                    class="btn btn-sm btn-danger btn-action"
-                                    title="Eliminar">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    {{-- Paginación --}}
-    <div class="d-flex justify-content-center">
-        {{ $clientes->links() }}
-    </div>
-@endif
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $clientes->links() }}
+        </div>
+    @endif
+</div>
 @endsection
-
-{{-- Script de confirmación de eliminación --}}
-@push('scripts')
-<script>
-    function confirmarEliminar(e) {
-        e.preventDefault();
-        if (confirm('¿Estás seguro de que deseas eliminar este cliente? Esta acción no se puede deshacer.')) {
-            e.target.submit();
-        }
-        return false;
-    }
-</script>
-@endpush

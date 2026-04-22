@@ -55,6 +55,22 @@ CREATE TABLE `producto`  (
   PRIMARY KEY (`ID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE archivos (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    nombre_temporal VARCHAR(255) NOT NULL,
+    ruta VARCHAR(255) NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    tamano INT(11) NOT NULL,
+    descripcion_corta VARCHAR(150) NULL,
+    descripcion_larga LONGTEXT NULL,
+    descargas INT(11) NOT NULL,
+    created DATETIME(6) NOT NULL,
+    updated DATETIME(6) NULL,
+    fk_user_id INT(11) NOT NULL,
+    
+    PRIMARY KEY (id)
+);
 -- ----------------------------
 -- Records of producto
 -- ----------------------------
