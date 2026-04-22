@@ -3,24 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Services\ProductoService;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
 
 class ProductoController extends Controller
 {
+    protected $productoService;
+
     /**
-     * INDEX — Muestra la lista de todos los productos.
+     * Inject ProductoService.
+     */
+    public function __construct(ProductoService $productoService)
+    {
+        $this->productoService = $productoService;
+    }
+
+    /**
+     * Display a listing of productos.
      */
     public function index()
     {
-        // Obtenemos los productos paginados de 10 en 10, ordenados por nombre
-        $productos = Producto::orderBy('nombre')->paginate(10);
-
+        $productos = $this->productoService->getAllProductos();
         return view('productos.index', compact('productos'));
     }
 
     /**
-     * CREATE — Muestra el formulario para crear un nuevo producto.
+     * Show form for creating a new producto.
      */
     public function create()
     {
@@ -28,19 +37,18 @@ class ProductoController extends Controller
     }
 
     /**
-     * STORE — Guarda el nuevo producto en la base de datos.
+     * Store a newly created producto.
      */
     public function store(StoreProductoRequest $request)
     {
-        Producto::create($request->validated());
+        $this->productoService->createProducto($request->validated());
 
-        return redirect()
-            ->route('productos.index')
+        return redirect()->route('productos.index')
             ->with('success', 'Producto creado exitosamente.');
     }
 
     /**
-     * SHOW — Muestra los detalles de un producto específico.
+     * Display the specified producto.
      */
     public function show(Producto $producto)
     {
@@ -48,7 +56,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * EDIT — Muestra el formulario para editar un producto existente.
+     * Show form for editing the specified producto.
      */
     public function edit(Producto $producto)
     {
@@ -56,26 +64,24 @@ class ProductoController extends Controller
     }
 
     /**
-     * UPDATE — Actualiza el producto en la base de datos.
+     * Update the specified producto.
      */
     public function update(UpdateProductoRequest $request, Producto $producto)
     {
-        $producto->update($request->validated());
+        $this->productoService->updateProducto($producto, $request->validated());
 
-        return redirect()
-            ->route('productos.index')
+        return redirect()->route('productos.index')
             ->with('success', 'Producto actualizado exitosamente.');
     }
 
     /**
-     * DESTROY — Elimina un producto de la base de datos.
+     * Remove the specified producto.
      */
     public function destroy(Producto $producto)
     {
-        $producto->delete();
+        $this->productoService->deleteProducto($producto);
 
-        return redirect()
-            ->route('productos.index')
+        return redirect()->route('productos.index')
             ->with('success', 'Producto eliminado exitosamente.');
     }
 }

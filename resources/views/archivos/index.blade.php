@@ -155,15 +155,4 @@
     </div>
 </div>
 
-@push('css')
-<style>
-    .upload-drop-zone:hover {
-        border-color: var(--primary-color) !important;
-        background: rgba(99, 102, 241, 0.05) !important;
-    }
-    input[type="file"]::-webkit-file-upload-button {
-        display: none;
-    }
-</style>
-@endpush
 @endsection

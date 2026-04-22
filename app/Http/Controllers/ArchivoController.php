@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Archivo;
+use App\Services\ArchivoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ArchivoController extends Controller
 {
+    protected $archivoService;
+
     /**
-     * Create a new controller instance.
+     * Inject the ArchivoService.
      */
-    public function __construct()
+    public function __construct(ArchivoService $archivoService)
     {
         $this->middleware('auth');
+        $this->archivoService = $archivoService;
     }
 
     /**
@@ -22,7 +25,7 @@ class ArchivoController extends Controller
      */
     public function index()
     {
-        $archivos = Archivo::with('user')->orderBy('created', 'desc')->get();
+        $archivos = $this->archivoService->getAllArchivos();
         return view('archivos.index', compact('archivos'));
     }
 
@@ -38,24 +41,11 @@ class ArchivoController extends Controller
         ]);
 
         if ($request->hasFile('archivo')) {
-            $file = $request->file('archivo');
-            $originalName = $file->getClientOriginalName();
-            $tempName = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            
-            // Store file in app/public/archivos
-            $path = $file->storeAs('archivos', $tempName, 'public');
-
-            Archivo::create([
-                'nombre' => $originalName,
-                'nombre_temporal' => $tempName,
-                'ruta' => $path,
-                'tipo' => $file->getMimeType(),
-                'tamano' => $file->getSize(),
-                'descripcion_corta' => $request->descripcion_corta,
-                'descripcion_larga' => $request->descripcion_larga,
-                'descargas' => 0,
-                'fk_user_id' => auth()->id(),
-            ]);
+            $this->archivoService->storeArchivo(
+                $request->file('archivo'),
+                $request->descripcion_corta,
+                $request->descripcion_larga
+            );
 
             return redirect()->route('archivos.index')->with('success', 'Archivo subido correctamente.');
         }
@@ -76,11 +66,7 @@ class ArchivoController extends Controller
      */
     public function destroy(Archivo $archivo)
     {
-        // Delete physical file
-        Storage::disk('public')->delete($archivo->ruta);
-        
-        // Delete database record
-        $archivo->delete();
+        $this->archivoService->deleteArchivo($archivo);
 
         return redirect()->route('archivos.index')->with('success', 'Archivo eliminado correctamente.');
     }
@@ -90,7 +76,7 @@ class ArchivoController extends Controller
      */
     public function download(Archivo $archivo)
     {
-        $archivo->increment('descargas');
+        $this->archivoService->incrementDownloads($archivo);
         return Storage::disk('public')->download($archivo->ruta, $archivo->nombre);
     }
 }

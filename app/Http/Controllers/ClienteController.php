@@ -1,24 +1,35 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Services\ClienteService;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 
 class ClienteController extends Controller
 {
+    protected $clienteService;
+
     /**
-     * INDEX — Muestra la lista de todos los clientes.
+     * Inject ClienteService.
+     */
+    public function __construct(ClienteService $clienteService)
+    {
+        $this->clienteService = $clienteService;
+    }
+
+    /**
+     * Display a listing of clientes.
      */
     public function index()
     {
-        $clientes = Cliente::orderBy('nombre')->paginate(10);
-
+        $clientes = $this->clienteService->getAllClientes();
         return view('clientes.index', compact('clientes'));
     }
 
     /**
-     * CREATE — Muestra el formulario para crear un nuevo cliente.
+     * Show form for creating a new cliente.
      */
     public function create()
     {
@@ -26,30 +37,26 @@ class ClienteController extends Controller
     }
 
     /**
-     * STORE — Guarda el nuevo cliente en la base de datos.
-     * Recibe StoreClienteRequest que ya validó los datos automáticamente.
+     * Store a newly created cliente.
      */
     public function store(StoreClienteRequest $request)
     {
-        // validated() retorna solo los campos que pasaron la validación
-        Cliente::create($request->validated());
+        $this->clienteService->createCliente($request->validated());
 
-        return redirect()
-            ->route('clientes.index')
+        return redirect()->route('clientes.index')
             ->with('success', 'Cliente creado exitosamente.');
     }
 
     /**
-     * SHOW — Muestra los detalles de un cliente específico.
+     * Display the specified cliente.
      */
     public function show(Cliente $cliente)
     {
-        // Laravel resuelve automáticamente el modelo por su ID (Route Model Binding)
         return view('clientes.show', compact('cliente'));
     }
 
     /**
-     * EDIT — Muestra el formulario para editar un cliente existente.
+     * Show form for editing the specified cliente.
      */
     public function edit(Cliente $cliente)
     {
@@ -57,26 +64,24 @@ class ClienteController extends Controller
     }
 
     /**
-     * UPDATE — Actualiza el cliente en la base de datos.
+     * Update the specified cliente.
      */
     public function update(UpdateClienteRequest $request, Cliente $cliente)
     {
-        $cliente->update($request->validated());
+        $this->clienteService->updateCliente($cliente, $request->validated());
 
-        return redirect()
-            ->route('clientes.index')
+        return redirect()->route('clientes.index')
             ->with('success', 'Cliente actualizado exitosamente.');
     }
 
     /**
-     * DESTROY — Elimina un cliente de la base de datos.
+     * Remove the specified cliente.
      */
     public function destroy(Cliente $cliente)
     {
-        $cliente->delete();
+        $this->clienteService->deleteCliente($cliente);
 
-        return redirect()
-            ->route('clientes.index')
+        return redirect()->route('clientes.index')
             ->with('success', 'Cliente eliminado exitosamente.');
     }
 }
