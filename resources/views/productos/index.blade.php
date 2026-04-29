@@ -9,11 +9,14 @@
         <h2 class="fw-bold mb-0">Inventario Pro</h2>
         <p class="text-muted small">Control total de existencias y valorización de stock.</p>
     </div>
-    <div class="col-md-6 text-md-end">
-        <a href="{{ route('productos.create') }}" class="btn btn-premium-secondary d-inline-flex align-items-center">
-            <i class="bi bi-plus-circle-fill me-2 fs-5"></i> Agregar Producto
-        </a>
-    </div>
+<div class="col-md-6 text-md-end">
+            <a href="{{ route('productos.report') }}" class="btn btn-outline-dark rounded-pill px-4 me-2">
+                <i class="bi bi-file-earmark-pdf me-2"></i> Reporte PDF
+            </a>
+            <a href="{{ route('productos.create') }}" class="btn btn-premium-secondary d-inline-flex align-items-center">
+                <i class="bi bi-plus-circle-fill me-2 fs-5"></i> Agregar Producto
+            </a>
+        </div>
 </div>
 
 <div class="glass-card border-0 p-4 mb-5">

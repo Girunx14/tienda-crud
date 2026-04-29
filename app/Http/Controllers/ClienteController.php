@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Services\ClienteService;
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClienteController extends Controller
 {
@@ -83,5 +84,18 @@ class ClienteController extends Controller
 
         return redirect()->route('clientes.index')
             ->with('success', 'Cliente eliminado exitosamente.');
+    }
+
+    /**
+     * Generate PDF report of all clientes.
+     */
+    public function report()
+    {
+        $clientes = $this->clienteService->getAllClientes();
+        $fecha = now()->format('d/m/Y H:i');
+        $totalClientes = $clientes->count();
+
+        $pdf = Pdf::loadView('reports.clientes', compact('clientes', 'fecha', 'totalClientes'));
+        return $pdf->download('reporte-clientes-' . now()->format('Y-m-d') . '.pdf');
     }
 }

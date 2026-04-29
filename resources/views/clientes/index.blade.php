@@ -9,11 +9,14 @@
         <h2 class="fw-bold mb-0">Base de Clientes</h2>
         <p class="text-muted small">Gestión centralizada de perfiles y facturación.</p>
     </div>
-    <div class="col-md-6 text-md-end">
-        <a href="{{ route('clientes.create') }}" class="btn btn-premium d-inline-flex align-items-center">
-            <i class="bi bi-person-plus-fill me-2 fs-5"></i> Nuevo Registro
-        </a>
-    </div>
+<div class="col-md-6 text-md-end">
+            <a href="{{ route('clientes.report') }}" class="btn btn-outline-dark rounded-pill px-4 me-2">
+                <i class="bi bi-file-earmark-pdf me-2"></i> Reporte PDF
+            </a>
+            <a href="{{ route('clientes.create') }}" class="btn btn-premium d-inline-flex align-items-center">
+                <i class="bi bi-person-plus-fill me-2 fs-5"></i> Nuevo Registro
+            </a>
+        </div>
 </div>
 
 <div class="glass-card border-0 p-4 mb-5">

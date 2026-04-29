@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Services\ProductoService;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductoController extends Controller
 {
@@ -83,5 +84,22 @@ class ProductoController extends Controller
 
         return redirect()->route('productos.index')
             ->with('success', 'Producto eliminado exitosamente.');
+    }
+
+    /**
+     * Generate PDF report of all productos.
+     */
+    public function report()
+    {
+        $productos = $this->productoService->getAllProductos();
+        $fecha = now()->format('d/m/Y H:i');
+        $totalProductos = $productos->count();
+        $stockBajo = $productos->where('cantidad', '<', 5)->count();
+        $valorTotal = $productos->sum(function($producto) {
+            return $producto->precio * $producto->cantidad;
+        });
+
+        $pdf = Pdf::loadView('reports.productos', compact('productos', 'fecha', 'totalProductos', 'stockBajo', 'valorTotal'));
+        return $pdf->download('reporte-productos-' . now()->format('Y-m-d') . '.pdf');
     }
 }

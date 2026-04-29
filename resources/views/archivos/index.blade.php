@@ -9,11 +9,14 @@
         <h2 class="fw-bold mb-0">Centro de Documentos</h2>
         <p class="text-muted">Administra y visualiza la documentación del sistema.</p>
     </div>
-    <div class="col-md-6 text-md-end">
-        <button type="button" class="btn btn-premium d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#uploadModal">
-            <i class="bi bi-cloud-arrow-up-fill fs-5 me-2"></i> Subir Nuevo Documento
-        </button>
-    </div>
+<div class="col-md-6 text-md-end">
+            <a href="{{ route('archivos.report') }}" class="btn btn-outline-dark rounded-pill px-4 me-2">
+                <i class="bi bi-file-earmark-pdf me-2"></i> Reporte PDF
+            </a>
+            <button type="button" class="btn btn-premium d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                <i class="bi bi-cloud-arrow-up-fill fs-5 me-2"></i> Subir Nuevo Documento
+            </button>
+        </div>
 </div>
 
 <div class="glass-card border-0 p-4 mb-5">

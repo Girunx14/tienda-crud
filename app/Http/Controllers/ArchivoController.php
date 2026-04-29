@@ -6,6 +6,7 @@ use App\Models\Archivo;
 use App\Services\ArchivoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ArchivoController extends Controller
 {
@@ -78,5 +79,19 @@ class ArchivoController extends Controller
     {
         $this->archivoService->incrementDownloads($archivo);
         return Storage::disk('public')->download($archivo->ruta, $archivo->nombre);
+    }
+
+    /**
+     * Generate PDF report of all archivos.
+     */
+    public function report()
+    {
+        $archivos = $this->archivoService->getAllArchivos();
+        $fecha = now()->format('d/m/Y H:i');
+        $totalArchivos = $archivos->count();
+        $totalDescargas = $archivos->sum('descargas');
+
+        $pdf = Pdf::loadView('reports.archivos', compact('archivos', 'fecha', 'totalArchivos', 'totalDescargas'));
+        return $pdf->download('reporte-documentos-' . now()->format('Y-m-d') . '.pdf');
     }
 }
