@@ -7,52 +7,57 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
 
-        <div class="card shadow-sm">
-            <div class="card-header bg-info text-white">
-                <h4 class="mb-0">
-                    <i class="bi bi-person-lines-fill"></i> Detalle del Cliente
-                </h4>
+        <div class="glass-card border-0 p-4">
+            <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                <div class="icon-shape bg-primary text-white rounded-3 d-flex align-items-center justify-content-center me-3"
+                    style="width: 50px; height: 50px; background: var(--gradient-1) !important;">
+                    <i class="bi bi-person-lines-fill fs-4"></i>
+                </div>
+                <div>
+                    <h4 class="mb-0 fw-bold">Detalle del Cliente</h4>
+                    <small class="text-muted">Información completa del cliente</small>
+                </div>
             </div>
 
-            <div class="card-body">
-                <table class="table table-bordered">
+            <div>
+                <table class="table">
                     <tr>
-                        <th width="30%" class="bg-light">ID</th>
-                        <td>{{ $cliente->id }}</td>
+                        <th width="30%" class="text-muted fw-semibold">ID</th>
+                        <td class="fw-bold">{{ $cliente->id }}</td>
                     </tr>
                     <tr>
-                        <th class="bg-light">Nombre</th>
+                        <th class="text-muted fw-semibold">Nombre</th>
                         <td>{{ $cliente->nombre }}</td>
                     </tr>
                     <tr>
-                        <th class="bg-light">Apellido Paterno</th>
+                        <th class="text-muted fw-semibold">Apellido Paterno</th>
                         <td>{{ $cliente->apellido_paterno }}</td>
                     </tr>
                     <tr>
-                        <th class="bg-light">Apellido Materno</th>
+                        <th class="text-muted fw-semibold">Apellido Materno</th>
                         <td>{{ $cliente->apellido_materno }}</td>
                     </tr>
                     <tr>
-                        <th class="bg-light">RFC</th>
-                        <td><span class="badge bg-secondary fs-6">{{ $cliente->rfc }}</span></td>
+                        <th class="text-muted fw-semibold">RFC</th>
+                        <td><span class="badge-premium" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">{{ $cliente->rfc }}</span></td>
                     </tr>
                     <tr>
-                        <th class="bg-light">Registrado el</th>
+                        <th class="text-muted fw-semibold">Registrado el</th>
                         <td>{{ $cliente->created_at->format('d/m/Y H:i') }}</td>
                     </tr>
                     <tr>
-                        <th class="bg-light">Última actualización</th>
+                        <th class="text-muted fw-semibold">Última actualización</th>
                         <td>{{ $cliente->updated_at->format('d/m/Y H:i') }}</td>
                     </tr>
                 </table>
             </div>
 
-            <div class="card-footer d-flex gap-2">
-                <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-warning">
-                    <i class="bi bi-pencil"></i> Editar
+            <div class="d-flex gap-2 pt-3 border-top">
+                <a href="{{ route('clientes.edit', $cliente) }}" class="btn btn-premium">
+                    <i class="bi bi-pencil me-2"></i> Editar
                 </a>
-                <a href="{{ route('clientes.index') }}" class="btn btn-secondary">
-                    <i class="bi bi-arrow-left"></i> Volver
+                <a href="{{ route('clientes.index') }}" class="btn btn-outline-dark rounded-3 px-4">
+                    <i class="bi bi-arrow-left me-2"></i> Volver
                 </a>
             </div>
         </div>

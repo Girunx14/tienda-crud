@@ -7,14 +7,19 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
 
-        <div class="card shadow-sm">
-            <div class="card-header bg-warning">
-                <h4 class="mb-0">
-                    <i class="bi bi-pencil-square"></i> Editar Cliente
-                </h4>
-            </div>
+<div class="glass-card border-0 p-4">
+                <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                    <div class="icon-shape bg-primary text-white rounded-3 d-flex align-items-center justify-content-center me-3"
+                        style="width: 50px; height: 50px; background: var(--gradient-1) !important;">
+                        <i class="bi bi-pencil-square fs-4"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">Editar Cliente</h4>
+                        <small class="text-muted">Actualiza la información del cliente</small>
+                    </div>
+                </div>
 
-            <div class="card-body">
+                <div>
                 <form action="{{ route('clientes.update', $cliente) }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -83,11 +88,11 @@
 
                     {{-- Botones --}}
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-warning">
-                            <i class="bi bi-save"></i> Actualizar Cliente
+                        <button type="submit" class="btn btn-premium">
+                            <i class="bi bi-save me-2"></i> Actualizar Cliente
                         </button>
-                        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left"></i> Cancelar
+                        <a href="{{ route('clientes.index') }}" class="btn btn-outline-dark rounded-3 px-4">
+                            <i class="bi bi-arrow-left me-2"></i> Cancelar
                         </a>
                     </div>
 

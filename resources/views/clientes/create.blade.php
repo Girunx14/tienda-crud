@@ -7,14 +7,19 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
 
-        <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">
-                    <i class="bi bi-person-plus"></i> Nuevo Cliente
-                </h4>
-            </div>
+<div class="glass-card border-0 p-4">
+                <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                    <div class="icon-shape bg-primary text-white rounded-3 d-flex align-items-center justify-content-center me-3"
+                        style="width: 50px; height: 50px; background: var(--gradient-1) !important;">
+                        <i class="bi bi-person-plus fs-4"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">Nuevo Cliente</h4>
+                        <small class="text-muted">Registra un nuevo cliente en el sistema</small>
+                    </div>
+                </div>
 
-            <div class="card-body">
+                <div>
                 <form action="{{ route('clientes.store') }}" method="POST">
                     @csrf
 
@@ -82,11 +87,11 @@
 
                     {{-- Botones --}}
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-save"></i> Guardar Cliente
+                        <button type="submit" class="btn btn-premium">
+                            <i class="bi bi-save me-2"></i> Guardar Cliente
                         </button>
-                        <a href="{{ route('clientes.index') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left"></i> Cancelar
+                        <a href="{{ route('clientes.index') }}" class="btn btn-outline-dark rounded-3 px-4">
+                            <i class="bi bi-arrow-left me-2"></i> Cancelar
                         </a>
                     </div>
 

@@ -82,10 +82,9 @@
                     <h5 class="fw-bold mb-3">Centro de Documentos</h5>
                     <p class="text-muted small mb-4">Sube, organiza y visualiza documentos técnicos y contratos de forma
                         segura.</p>
-                    <a href="{{ route('archivos.index') }}" class="btn btn-dark w-100 rounded-4 py-2 fw-bold"
-                        style="background: #1e293b;">
-                        FileManager <i class="bi bi-arrow-right ms-2"></i>
-                    </a>
+<a href="{{ route('archivos.index') }}" class="btn btn-premium-secondary w-100">
+                    FileManager <i class="bi bi-arrow-right ms-2"></i>
+                </a>
                 </div>
             </div>
         </div>

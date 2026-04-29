@@ -69,11 +69,10 @@ body {
     color: var(--primary-color) !important;
 }
 
-.btn-premium,
-.btn-premium-secondary {
-    background: var(--gradient-1);
-    border: none;
-    color: white;
+.btn-premium {
+    background: var(--gradient-1) !important;
+    border: none !important;
+    color: white !important;
     padding: 0.6rem 1.5rem;
     border-radius: 14px;
     font-weight: 600;
@@ -81,11 +80,34 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn-premium:hover,
+.btn-premium:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    color: white !important;
+}
+
+.btn-premium-secondary {
+    background: var(--gradient-2) !important;
+    border: none !important;
+    color: white !important;
+    padding: 0.6rem 1.5rem;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 .btn-premium-secondary:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    color: white;
+    color: white !important;
+}
+
+/* Ensure button text is always visible */
+.btn-premium i,
+.btn-premium-secondary i,
+.btn-outline-dark i {
+    display: inline-block !important;
 }
 
 /* Override Bootstrap defaults to ensure everything is black */
