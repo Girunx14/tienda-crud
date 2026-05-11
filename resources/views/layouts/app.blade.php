@@ -59,6 +59,12 @@
                                 <i class="bi bi-file-earmark-arrow-up me-1"></i> Archivos
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('empleados*') ? 'active' : '' }}"
+                                href="{{ route('empleados.index') }}">
+                                <i class="bi bi-person-badge me-1"></i> Empleados
+                            </a>
+                        </li>
                     </ul>
                 @endauth
 

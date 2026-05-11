@@ -26,6 +26,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('archivos', ArchivoController::class);
     Route::get('archivos/{archivo}/download', [ArchivoController::class, 'download'])->name('archivos.download');
     Route::get('archivos-report', [ArchivoController::class, 'report'])->name('archivos.report');
+
+    Route::get('empleados', function () {
+        return view('empleados');
+    })->name('empleados.index');
 });
 
 Auth::routes();
